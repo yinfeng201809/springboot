@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>spring-boot-docker</artifactId>
-	<version>1.0</version>
+	<artifactId>springboot</artifactId>
+	<version>4.0</version>
 	<packaging>jar</packaging>
 
 	<name>springboot</name>
@@ -22,8 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-
-		<docker.image.prefix>imageprefix</docker.image.prefix>
+		<docker.image.prefix>registry-vpc.cn-hangzhou.aliyuncs.com/springboot1225</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -106,8 +105,9 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>1.0.0</version>
 				<configuration>
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
+					<registryUrl>registry-vpc.cn-hangzhou.aliyuncs.com</registryUrl>
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>
