@@ -5,7 +5,7 @@
 
 	<groupId>com.example</groupId>
 	<artifactId>springboot</artifactId>
-	<version>4.1</version>
+	<version>4.3</version>
 	<packaging>jar</packaging>
 
 	<name>springboot</name>
