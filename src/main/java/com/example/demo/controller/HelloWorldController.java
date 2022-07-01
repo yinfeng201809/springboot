@@ -38,7 +38,7 @@ public class HelloWorldController {
         if (value == null) {
             value = "nullvalue";
         }
-        User user=new User("aa@126.com", "aa", "aa123456", "aa","123");
+        User user=new User();
         ValueOperations<String, User> operations=redisTemplate.opsForValue();
         operations.set("com.neox", user);
         operations.set("com.neo.f", user,11, TimeUnit.SECONDS);

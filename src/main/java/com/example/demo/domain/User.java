@@ -1,12 +1,19 @@
 package com.example.demo.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.example.demo.spring.aopstudy.MyAopAnno;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,66 +31,28 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String regTime;
 
-    public User() {
+    @javax.persistence.Transient
+    List<String> phoneList;
+
+    @Transient
+    private Date dateTest;
+    public String aopmethod(String name) {
+        return name;
     }
 
-    public User(String userName, String passWord, String email, String nickName, String regTime) {
-        this.userName = userName;
-        this.passWord = passWord;
-        this.email = email;
-        this.nickName = nickName;
-        this.regTime = regTime;
+    public String aopmethod2(String name) {
+        if (name == null) {
+//            throw new RuntimeException("name is null");
+        }
+        return name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User changeUser(User user) {
+        return user;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public void setRegTime(String regTime) {
-        this.regTime = regTime;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public String getRegTime() {
-        return regTime;
+    @MyAopAnno
+    public User annoUser(User user) {
+        return user;
     }
 }

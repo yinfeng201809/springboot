@@ -1,67 +1,31 @@
 package com.example.demo.domain;
 
+import com.example.demo.spring.validation.MyConstraint;
 import com.example.demo.support.UserSexEnum;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @MyConstraint(min = 1,max = 10)
     private Long id;
     private String userName;
     private String passWord;
     private UserSexEnum userSex;
     private String nickName;
 
-    public UserEntity() {
-        super();
-    }
-
     public UserEntity(String userName, String passWord, UserSexEnum userSex) {
         super();
         this.passWord = passWord;
         this.userName = userName;
         this.userSex = userSex;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
-
-    public UserSexEnum getUserSex() {
-        return userSex;
-    }
-
-    public void setUserSex(UserSexEnum userSex) {
-        this.userSex = userSex;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     @Override
