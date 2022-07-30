@@ -25,19 +25,29 @@ public class JwtToken {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(2048);
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
+
+
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        Calendar calendar=Calendar.getInstance();
-        calendar.add(Calendar.HOUR, 1);
-        String jwtToken = Jwts.builder().claim("a","aaaaaa").setId("id").setExpiration(calendar.getTime())
+        // 获取token
+        String jwtToken = Jwts.builder().claim("a","aaaaaa").setId("id").setExpiration(getExpireDate())
                         .signWith(privateKey).compact();
+
         System.out.println(jwtToken);
-        RSA rsa = new RSA(Base64.encode(privateKey.getEncoded()), Base64.encode(keyPair.getPublic().getEncoded()));
-        rsa.getPrivateKey();
+
+        // 解密
+        RSA rsa = new RSA(null, Base64.encode(keyPair.getPublic().getEncoded()));
         MD5.create().digest("", "");
         Jws<Claims> result = Jwts.parser().setSigningKey(rsa.getPublicKey()).parseClaimsJws(jwtToken);
+
         System.out.println(result.getBody().get("a"));
     }
 
+    private static Date getExpireDate() {
+        Calendar calendar=Calendar.getInstance();
+        calendar.add(Calendar.HOUR, 1);
+        Date expireDate=calendar.getTime();
+        return expireDate;
+    }
 
 
     /**
