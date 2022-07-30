@@ -7,7 +7,6 @@ pipeline {
         stage('Build') {
             steps {
                 bat "mvn clean install "
-                bat "printenv"
                 echo 'Hello World'
             }
         }
